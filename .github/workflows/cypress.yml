@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   Run-Cypress:
-    if: ${{ github.event.action == 'labeled' && github.event.label.name == 'run-cypress' || github.event.label.name == 'run-cypress-app-builder'}}
+    if: ${{ github.event.action == 'labeled' && (github.event.label.name == 'run-cypress' || github.event.label.name == 'run-cypress-app-builder')}}
 
     runs-on: ubuntu-22.04
     steps:
@@ -31,20 +31,20 @@ jobs:
         with:
           node-version: 18.3.0
 
-      - name: Checking the PR URL
-        run: |
-          while true; do
-          curl --silent --fail https://tooljet-pr-${{ env.PR_NUMBER }}.onrender.com && break
-          sleep 1
-          done
+      # - name: Checking the PR URL
+      #   run: |
+      #     while true; do
+      #     curl --silent --fail https://tooljet-pr-${{ env.PR_NUMBER }}.onrender.com && break
+      #     sleep 1
+      #     done
 
-      - name: Create cypress env
-        id: create-json
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "cypress.env.json"
-          json: ${{ secrets.CYPRESS_SECRETS }}
-          dir: './cypress-tests'
+      # - name: Create cypress env
+      #   id: create-json
+      #   uses: jsdaniell/create-json@1.1.2
+      #   with:
+      #     name: "cypress.env.json"
+      #     json: ${{ secrets.CYPRESS_SECRETS }}
+      #     dir: './cypress-tests'
 
         if: ${{github.event.label.name == 'run-cypress'}}
       - name: Cypress integration test
