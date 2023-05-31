@@ -36,7 +36,7 @@ jobs:
           until curl --silent --fail https://tooljet-pr-${{ env.PR_NUMBER }}.onrender.com; do
             sleep 1
           done
-          timeout: 120s
+          timeout-mitutes: 1
 
       - name: Create Cypress environment file
         id: create-json
