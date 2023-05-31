@@ -31,10 +31,16 @@ jobs:
         with:
           node-version: 18.3.0
 
+#       - name: Checking the PR URL
+#         run: |
+#           timeout 120 bash -c '
+#           until curl --silent --fail https://tooljet-pr-${PR_NUMBER}.onrender.com; do
+#             sleep 20
+#           done'
       - name: Checking the PR URL
         run: |
           timeout 120 bash -c '
-          until curl --silent --fail https://tooljet-pr-${PR_NUMBER}.onrender.com; do
+          until curl --silent --fail https://app.tooljet.com/; do
             sleep 20
           done'
 
